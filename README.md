@@ -14,3 +14,5 @@ Current Features:
  Next Project:
  -  increasing segment strength calculation accuracy
  -  9-Point detection
+
+Use of these programs in any project without written permission is prohibited.
