@@ -7,7 +7,7 @@
 from turtle import circle
 
 
-def testCircleGen(radius, centerX =0, centerY=0):
+def CircleGen(radius, centerX =0, centerY=0):
     '''radius: the radius of the intended sample circle
     \ncenterX: the x cordinate of the center of the intended sample circle
     \ncenterY: the y cordinate of the center of the intended sample circle
@@ -40,7 +40,7 @@ def testCircleGen(radius, centerX =0, centerY=0):
     return cordList
 
 def circleGenTesting(radius, centerX = 0, centerY = 0):
-    testCircle = testCircleGen(radius, centerX, centerY)
+    testCircle = CircleGen(radius, centerX, centerY)
     for i in range(len(testCircle)):
         print(f"{i}: {testCircle[i]}")
         

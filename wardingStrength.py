@@ -60,8 +60,29 @@ def calculateCurveHeight(base1:tuple, tip:tuple, base2:tuple):
     height = numpy.sin(theta) * acMag
 
     return height
-def wardStrCircleTesting (radius, centerX, centerY):
-    testOutput = main(wardingGen.testCircleGen(radius, centerX, centerY), 1)
 
+
+def wardStrCircleTesting (r, centerX = 0, centerY = 0):
+    ''' Tests wardingStrength on a circle or radius "r" at ("centerX", "centerY")
+    \n prints the strength of each segment as calculated to the command line 
+    then prints the max and min strengths'''
+
+    testOutput = main(wardingGen.CircleGen(r, centerX, centerY), 1)
+
+    max = [0, testOutput[0]]
+    min = [0, testOutput[0]]
     for i in range(len(testOutput)):
         print(f"{i}: {testOutput[i]}")
+
+        # Check if a new max is found.
+        tempMax = max[1]
+        if testOutput[i] > tempMax:
+            max = [i, testOutput[i]]
+        
+        # Check if a new min is found.
+        tempMin = min[1]
+        if testOutput[i] < tempMin:
+            min = [i, testOutput[i]]
+    
+    print(f"Max Str:\n   {max[0]}: {max[1]} \nMin Str:\n   {min[0]}: {min[1]}")
+    print(f"Difrance: {max[1] - min[1]}")
