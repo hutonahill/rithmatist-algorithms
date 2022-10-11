@@ -1,8 +1,13 @@
+import wardingGen
 
-from msvcrt import SEM_NOALIGNMENTFAULTEXCEPT
-
-
-def main(circleCords:list, powerMod=1):
+# Accept the cords of a line of warding that re attaches to itslef 
+# and a power moddifer.
+def main(circleCords:list, powerMod = 1):
+    '''circleCords: The cordinates for points on a line of warding
+    \npowerMod: a power modifier for the line of warding
+    \nReturn: a list of strengths of of segments of the line of warding starting 
+    with the second full segment counter clockwise from the first point in the 
+    input list '''
     
     # Create ouput list
     ouput = []
@@ -55,4 +60,8 @@ def calculateCurveHeight(base1:tuple, tip:tuple, base2:tuple):
     height = numpy.sin(theta) * acMag
 
     return height
+def wardStrCircleTesting (radius, centerX, centerY)
+    testOutput = main(wardingGen.testCircleGen(radius, centerX, centerY), 1)
 
+    for i in range(len(testOutput)):
+        print(f"{i}: {testOutput[i]}")

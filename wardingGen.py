@@ -4,7 +4,14 @@
 # with each point seperated by 1 unit of circomfrence
 # returned list will contane a number of items eqle to the
 # circumference (erhaps +1?)
+from turtle import circle
+
+
 def testCircleGen(radius, centerX =0, centerY=0):
+    '''radius: the radius of the intended sample circle
+    \ncenterX: the x cordinate of the center of the intended sample circle
+    \ncenterY: the y cordinate of the center of the intended sample circle
+    \nReturn: a list of points, 1 unit appart around the sample circle'''
     import math
     import numpy
 
@@ -32,7 +39,8 @@ def testCircleGen(radius, centerX =0, centerY=0):
     
     return cordList
 
-testCircle = testCircleGen(5)
-for i in range(len(testCircle)):
-    print(f"{i}: {testCircle[i]}")
+def circleGenTesting(radius, centerX = 0, centerY = 0):
+    testCircle = testCircleGen(radius, centerX, centerY)
+    for i in range(len(testCircle)):
+        print(f"{i}: {testCircle[i]}")
         
