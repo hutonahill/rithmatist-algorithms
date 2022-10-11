@@ -4,8 +4,6 @@
 # with each point seperated by 1 unit of circomfrence
 # returned list will contane a number of items eqle to the
 # circumference (erhaps +1?)
-from turtle import circle
-
 
 def CircleGen(radius, centerX =0, centerY=0):
     '''radius: the radius of the intended sample circle
