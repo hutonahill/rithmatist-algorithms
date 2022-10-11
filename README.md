@@ -12,4 +12,5 @@ Current Features:
   - kinda accurate calculations for segment strength of a line of warding
 
  Next Project:
+ -  increasing segment strength calculation accuracy
  -  9-Point detection
