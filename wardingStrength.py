@@ -60,7 +60,7 @@ def calculateCurveHeight(base1:tuple, tip:tuple, base2:tuple):
     height = numpy.sin(theta) * acMag
 
     return height
-def wardStrCircleTesting (radius, centerX, centerY)
+def wardStrCircleTesting (radius, centerX, centerY):
     testOutput = main(wardingGen.testCircleGen(radius, centerX, centerY), 1)
 
     for i in range(len(testOutput)):
