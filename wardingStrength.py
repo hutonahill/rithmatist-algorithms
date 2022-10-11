@@ -1,3 +1,6 @@
+# This code is owned by Hutonahill who researves all rights related to it.
+# Use of this code, without written permition, is prohibited.
+
 # Accept the cords of a line of warding that re attaches to itslef 
 # and a power moddifer.
 def main(circleCords:list, powerMod = 1):

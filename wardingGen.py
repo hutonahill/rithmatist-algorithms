@@ -1,4 +1,5 @@
-
+# This code is owned by Hutonahill who researves all rights related to it.
+# Use of this code, without written permition, is prohibited.
 
 # Returns a list of cords of a circle 
 # with each point seperated by 1 unit of circomfrence
