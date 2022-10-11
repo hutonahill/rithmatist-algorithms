@@ -16,4 +16,4 @@ Current Features:
  -  9-Point detection
 
 Use of the code in this repository in any project without written permission is prohibited.
-Use of the ideas in the google drive folder is encuraged.
+<br>Use of the ideas in the google drive folder is encuraged.
