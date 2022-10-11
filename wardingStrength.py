@@ -67,7 +67,8 @@ def wardStrCircleTesting (r, centerX = 0, centerY = 0):
     import wardingGen
     ''' Tests wardingStrength on a circle or radius "r" at ("centerX", "centerY")
     \n prints the strength of each segment as calculated to the command line 
-    then prints the max and min strengths'''
+    then prints the max and min strengths 
+    \n max and min ignore final segment'''
 
     testOutput = main(wardingGen.CircleGen(r, centerX, centerY), 1)
 
@@ -78,12 +79,12 @@ def wardStrCircleTesting (r, centerX = 0, centerY = 0):
 
         # Check if a new max is found.
         tempMax = max[1]
-        if testOutput[i] > tempMax:
+        if testOutput[i] > tempMax and i != (len(testOutput)-1):
             max = [i, testOutput[i]]
         
         # Check if a new min is found.
         tempMin = min[1]
-        if testOutput[i] < tempMin:
+        if testOutput[i] < tempMin and i != (len(testOutput)-1):
             min = [i, testOutput[i]]
     
     print(f"Max Str:\n   {max[0]}: {max[1]} \nMin Str:\n   {min[0]}: {min[1]}")
