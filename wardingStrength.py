@@ -88,4 +88,5 @@ def wardStrCircleTesting (r, centerX = 0, centerY = 0):
             min = [i, testOutput[i]]
     
     print(f"Max Str:\n   {max[0]}: {max[1]} \nMin Str:\n   {min[0]}: {min[1]}")
-    print(f"Difrance: {max[1] - min[1]}")
+    print(f"Difrance: {max[1] - min[1]}" + 
+    f"\n   {round((max[1] - min[1])/min[1]*100, 3)}% max error")
