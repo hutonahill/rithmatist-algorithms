@@ -15,4 +15,5 @@ Current Features:
  -  increasing segment strength calculation accuracy
  -  9-Point detection
 
-Use of these programs in any project without written permission is prohibited.
+Use of the code in this repository in any project without written permission is prohibited.
+Use of the ideas in the google drive folder is encuraged.
