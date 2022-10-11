@@ -1,5 +1,3 @@
-import wardingGen
-
 # Accept the cords of a line of warding that re attaches to itslef 
 # and a power moddifer.
 def main(circleCords:list, powerMod = 1):
@@ -33,6 +31,9 @@ def main(circleCords:list, powerMod = 1):
 
         # Append data to list
         segmentStrength.append(copyData)
+
+    # shift segmentStrength so the fist segment starts with the first input cord
+    segmentStrength = segmentStrength[2:] + segmentStrength[:2]
     
     return segmentStrength
 
@@ -63,6 +64,7 @@ def calculateCurveHeight(base1:tuple, tip:tuple, base2:tuple):
 
 
 def wardStrCircleTesting (r, centerX = 0, centerY = 0):
+    import wardingGen
     ''' Tests wardingStrength on a circle or radius "r" at ("centerX", "centerY")
     \n prints the strength of each segment as calculated to the command line 
     then prints the max and min strengths'''
