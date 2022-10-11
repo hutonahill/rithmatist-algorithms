@@ -1,11 +1,11 @@
 # Accept the cords of a line of warding that re attaches to itslef 
 # and a power moddifer.
 def main(circleCords:list, powerMod = 1):
-    '''circleCords: The cordinates for points on a line of warding
-    \npowerMod: a power modifier for the line of warding
-    \nReturn: a list of strengths of of segments of the line of warding starting 
-    with the second full segment counter clockwise from the first point in the 
-    input list '''
+    '''circleCords: The coordinates for points on a line of warding.
+    \npowerMod: a power modifier for the line of warding.
+    \nReturn: a list of strengths of segments of the line of warding starting 
+    with the second full segment counterclockwise from the first point in the 
+    input list.'''
 
     # Loop through the circle cords and get the each arc group strength.
     groupStr = []
@@ -36,6 +36,11 @@ def main(circleCords:list, powerMod = 1):
 
 
 def calculateCurveHeight(base1:tuple, tip:tuple, base2:tuple):
+    '''calculate the height of a triangle
+    \nbase1: one of the bases of a triangle
+    \nbase2: the other base of a triangle
+    \ntip: the third point of a triangle
+    \nReturn: the height of the input triangle'''
     import numpy
    
     #find the magnitude
@@ -67,7 +72,7 @@ def wardStrCircleTesting (r, centerX = 0, centerY = 0):
     then prints the max and min strengths 
     \n max and min ignore final segment'''
 
-    testOutput = main(wardingGen.CircleGen(r, centerX, centerY), 1)
+    testOutput = main(wardingGen.circleGen(r, centerX, centerY), 1)
 
     max = [0, testOutput[0]]
     min = [0, testOutput[0]]
