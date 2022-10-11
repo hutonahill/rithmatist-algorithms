@@ -5,7 +5,7 @@
 # returned list will contane a number of items eqle to the
 # circumference 
 
-def CircleGen(radius, centerX =0, centerY=0):
+def circleGen(radius, centerX =0, centerY=0):
     '''radius: the radius of the intended sample circle
     \ncenterX: the x cordinate of the center of the intended sample circle
     \ncenterY: the y cordinate of the center of the intended sample circle
@@ -40,7 +40,7 @@ def circleGenTesting(radius, centerX = 0, centerY = 0):
     '''prints our the strength of each segment in a circle then 
     prints out the max and min segment strengths and the difrance 
     between max and min and the asoceated error'''
-    testCircle = CircleGen(radius, centerX, centerY)
+    testCircle = circleGen(radius, centerX, centerY)
     for i in range(len(testCircle)):
         print(f"{i}: {testCircle[i]}")
         
