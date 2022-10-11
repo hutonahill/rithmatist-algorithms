@@ -6,9 +6,6 @@ def main(circleCords:list, powerMod = 1):
     \nReturn: a list of strengths of of segments of the line of warding starting 
     with the second full segment counter clockwise from the first point in the 
     input list '''
-    
-    # Create ouput list
-    ouput = []
 
     # Loop through the circle cords and get the each arc group strength.
     groupStr = []
