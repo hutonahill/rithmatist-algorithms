@@ -3,13 +3,14 @@
 
 # Accept the cords of a line of warding that re attaches to itslef 
 # and a power moddifer.
+import numpy
+
 def main(circleCords:list, powerMod = 1):
     '''circleCords: The coordinates for points on a line of warding.
     \npowerMod: a power modifier for the line of warding.
     \nReturn: a list of strengths of segments of the line of warding starting 
     with the second full segment counterclockwise from the first point in the 
     input list.'''
-
     # Loop through the circle cords and get the each arc group strength.
     groupStr = []
     for i in range(len(circleCords)):
@@ -44,7 +45,6 @@ def calculateCurveHeight(base1:tuple, tip:tuple, base2:tuple):
     \nbase2: the other base of a triangle
     \ntip: the third point of a triangle
     \nReturn: the height of the input triangle'''
-    import numpy
    
     #find the magnitude
     def mag(a:tuple):

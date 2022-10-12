@@ -44,4 +44,33 @@ def circleGenTesting(radius, centerX = 0, centerY = 0):
     testCircle = circleGen(radius, centerX, centerY)
     for i in range(len(testCircle)):
         print(f"{i}: {testCircle[i]}")
+
+def threePointGen(circle:list):
+    '''Generates 3 point in an input "circle" with its center at 0,0, two of which will be 
+    directly across from each other'''
+
+    import random
+
+    rand1 = random.randint(0,len(circle))
+
+    output = [circle[rand1]]
+
+    rand2 = random.randint(0,len(circle)) 
+
+    while rand1 == rand2:
+        rand2 = random.randint(0,len(circle)) 
+    
+    output.append(circle[rand2])
+
+    copyData = circle[rand2]
+
+    copydata = (copydata[0]*-1, copydata[1]*-1)
+
+    output.append(copydata)
+
+    random.shuffle(output)
+
+    return output
+
+
         
