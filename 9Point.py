@@ -38,3 +38,7 @@ Cpp[1]**2 - 2 * Cpp[1] * Ap[1] + Cpp[0]**2 - 2 * Cpp[0] * Ap[1]
 # and 2 is always posible 
 # 
 # that brings us to  2,643
+
+
+# ault method, do a negation proof
+# prove of a set of points is not part 
