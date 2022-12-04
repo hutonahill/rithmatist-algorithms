@@ -6,11 +6,18 @@
 # returned list will contane a number of items eqle to the
 # circumference 
 
+def RADIUS_KEY():
+    return "radius"
+
+def CIRCLE_KEY():
+    return "circle"
+
 def circleGen(radius, centerX =0, centerY=0):
     '''radius: the radius of the intended sample circle
     \ncenterX: the x cordinate of the center of the intended sample circle
     \ncenterY: the y cordinate of the center of the intended sample circle
-    \nReturn: a list of points, 1/2 unit appart around the sample circle'''
+    \nReturn: a dictionary wiht the radius and a \
+    list of points, 1/2 unit appart around the sample circle'''
     import numpy
 
     # Calculate circumference
@@ -23,7 +30,8 @@ def circleGen(radius, centerX =0, centerY=0):
     radPerUnit = rad/(circumference*2)
 
 
-    cordList = []
+    circleDict = {RADIUS_KEY():radius, CIRCLE_KEY():[]}
+    copyData = []
     for theta in numpy.arange(0,rad,radPerUnit):
 
         # Calculate xy cords assuming center is 0,0.
@@ -33,20 +41,26 @@ def circleGen(radius, centerX =0, centerY=0):
         # Shift cords to account for posible difrent center.
         cords = (x + centerX, y + centerY)
 
-        cordList.append(cords)
+        copyData.append(cords)
     
-    return cordList
+    circleDict[CIRCLE_KEY()] = copyData
+    
+    return circleDict.copy()
 
 def circleGenTesting(radius, centerX = 0, centerY = 0):
     '''prints our the strength of each segment in a circle then 
     prints out the max and min segment strengths and the difrance 
     between max and min and the asoceated error'''
-    testCircle = circleGen(radius, centerX, centerY)
+    testCircleDict = circleGen(radius, centerX, centerY)
+
+    testCircle = testCircleDict[CIRCLE_KEY()]
+
     for i in range(len(testCircle)):
         print(f"{i}: {testCircle[i]}")
 
 def threePointGen(circle:list):
-    '''Generates 3 point in an input "circle" with its center at 0,0, two of which will be 
+    '''Generates 3 point in an input "circle" with its center at \
+        0,0, two of which will be 
     directly across from each other'''
 
     import random
@@ -62,7 +76,7 @@ def threePointGen(circle:list):
     
     output.append(circle[rand2])
 
-    copyData = circle[rand2]
+    copydata = circle[rand2]
 
     copydata = (copydata[0]*-1, copydata[1]*-1)
 

@@ -5,6 +5,7 @@
 # and a power moddifer.
 import numpy
 
+
 def main(circleCords:list, powerMod = 1):
     '''circleCords: The coordinates for points on a line of warding.
     \npowerMod: a power modifier for the line of warding.
@@ -68,14 +69,16 @@ def calculateCurveHeight(base1:tuple, tip:tuple, base2:tuple):
     return height
 
 
-def wardStrCircleTesting (r, centerX = 0, centerY = 0):
-    import wardingGen
+def wardStrCircleTesting (radius, centerX = 0, centerY = 0):
+    from wardingGen import circleGen, RADIUS_KEY, CIRCLE_KEY
     ''' Tests wardingStrength on a circle or radius "r" at ("centerX", "centerY")
     \n prints the strength of each segment as calculated to the command line 
     then prints the max and min strengths 
     \n max and min ignore final segment'''
 
-    testOutput = main(wardingGen.circleGen(r, centerX, centerY), 1)
+    circleDict = circleGen(radius, centerX, centerY)
+
+    testOutput = main(circleDict[CIRCLE_KEY()], 1)
 
     max = [0, testOutput[0]]
     min = [0, testOutput[0]]
@@ -94,4 +97,4 @@ def wardStrCircleTesting (r, centerX = 0, centerY = 0):
     
     print(f"Max Str:\n   {max[0]}: {max[1]} \nMin Str:\n   {min[0]}: {min[1]}")
     print(f"Difrance: {max[1] - min[1]}" + 
-    f"\n   {round((max[1] - min[1])/min[1]*100, 3)}% max error")
+    f"\n   {round((max[1] - min[1])/min[1]*100, 3)}% max error") 
