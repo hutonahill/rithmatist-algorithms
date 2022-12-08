@@ -70,7 +70,7 @@ def calculateCurveHeight(base1:tuple, tip:tuple, base2:tuple):
 
 
 def wardStrCircleTesting (radius, centerX = 0, centerY = 0):
-    from wardingGen import circleGen, RADIUS_KEY, CIRCLE_KEY
+    from wardingGen import circleGen, CENTER_KEY, CIRCLE_KEY
     ''' Tests wardingStrength on a circle or radius "r" at ("centerX", "centerY")
     \n prints the strength of each segment as calculated to the command line 
     then prints the max and min strengths 

@@ -6,7 +6,7 @@
 # returned list will contane a number of items eqle to the
 # circumference 
 
-def RADIUS_KEY():
+def CENTER_KEY():
     return "radius"
 
 def CIRCLE_KEY():
@@ -30,7 +30,7 @@ def circleGen(radius, centerX =0, centerY=0):
     radPerUnit = rad/(circumference*2)
 
 
-    circleDict = {RADIUS_KEY():radius, CIRCLE_KEY():[]}
+    circleDict = {CENTER_KEY():(centerX,centerY), CIRCLE_KEY():[]}
     copyData = []
     for theta in numpy.arange(0,rad,radPerUnit):
 
