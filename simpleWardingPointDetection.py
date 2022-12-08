@@ -25,6 +25,7 @@ def fourPoint(center:tuple, points:list):
     pointError = [0.0]
 
 
+    # calculate the error for each point except the first.
     for i in range(1, (len(points)-1)):
 
         line1 = (points[0], center)
@@ -32,7 +33,7 @@ def fourPoint(center:tuple, points:list):
         theta = findAngle(line1, line2)
 
 
-
+        # Determin whitch ideal 4-point is closest
         if numpy.abs(theta-90) > numpy.abs(theta-180):
             pointError.append(theta-180)
         
@@ -64,14 +65,14 @@ def sixPoint(center:tuple, points:list):
 
     pointError = [0.0]
 
-
+    # calculat ethe error for each posible 6-point
     for i in range(1, (len(points)-1)):
 
         line1 = (points[0], center)
         line2 = (points[i], center)
         theta = findAngle(line1, line2)
 
-        # calculate the error assuming each posible ideas 6-point.
+        # determin which ideal 6-point is closets to input point
 
         posibleErrorValues = [theta - 60, theta - 120, theta - 180]
         minValue = numpy.abs(posibleErrorValues[0])
