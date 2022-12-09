@@ -58,7 +58,7 @@ def circleGenTesting(radius, centerX = 0, centerY = 0):
     for i in range(len(testCircle)):
         print(f"{i}: {testCircle[i]}")
 
-def threePointGen(circle:list, numPoints = 3):
+def pointGen(circle:list, numPoints = 3):
     '''Generates 3 points in an input "circle" with its center at \
         0,0, '''
 
