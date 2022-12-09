@@ -58,31 +58,40 @@ def circleGenTesting(radius, centerX = 0, centerY = 0):
     for i in range(len(testCircle)):
         print(f"{i}: {testCircle[i]}")
 
-def threePointGen(circle:list):
-    '''Generates 3 point in an input "circle" with its center at \
-        0,0, two of which will be 
-    directly across from each other'''
+def threePointGen(circle:list, numPoints = 3):
+    '''Generates 3 points in an input "circle" with its center at \
+        0,0, '''
 
     import random
 
+    if numPoints < 3:
+        raise TypeError(f"numPoints must be greater than or equil to 3." + 
+        f"it is currently set to {numPoints}.")
+
+
     rand1 = random.randint(0,len(circle))
 
-    output = [circle[rand1]]
+    randIndexes = [rand1]
 
-    rand2 = random.randint(0,len(circle)) 
+    numPoints = numPoints - 1
 
-    while rand1 == rand2:
+    for i in range(1, numPoints):
+
+
         rand2 = random.randint(0,len(circle)) 
+
+        #make sure there are no duplicates
+        while rand2 in randIndexes:
+            rand2 = random.randint(0,len(circle)) 
     
-    output.append(circle[rand2])
+        randIndexes.append(rand2)
 
-    copydata = circle[rand2]
 
-    copydata = (copydata[0]*-1, copydata[1]*-1)
+    random.shuffle(randIndexes)
 
-    output.append(copydata)
-
-    random.shuffle(output)
+    output = []
+    for i in randIndexes:
+        output.append(circle[i])
 
     return output
 
