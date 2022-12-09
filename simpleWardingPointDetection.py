@@ -2,7 +2,7 @@ import numpy
 
 ACCEPTABLE_DEGREES_ERROR = 10
 
-def main():
+def main(circle:dict, points:list):
     pass
 
 def fourPoint(center:tuple, points:list):
@@ -107,74 +107,9 @@ def findAngle(line1:list, line2:list):
         raise TypeError(f"line2 must include 2 points. You included " + 
         f"{len(line2)} points")
     
-    
-    # check the type of each point
-    elif type(line1[0]) != tuple:
-        raise TypeError("points but be formated as a tuple. " + 
-        f"The input point line1[0] is formated as a {type(line1[0])}")
-
-    elif type(line1[1]) != tuple:
-        raise TypeError("points but be formated as a tuple. " + 
-        f"The input point line1[1] is formated as a {type(line1[1])}")
-
-    elif type(line2[0]) != tuple:
-        raise TypeError("points but be formated as a tuple. " + 
-        f"The input point line2[0] is formated as a {type(line2[0])}")
-
-    elif type(line2[1]) != tuple:
-        raise TypeError("points but be formated as a tuple. " + 
-        f"The input point line2[1] is formated as a {type(line2[1])}")
-
-    # check the length of each point
-    elif len(line1[0]) != 2:
-        raise TypeError("Points are composed of two cordinates. " + 
-        f"The input point line1[0] has {len(line1[0])} cordinates")
-
-    elif len(line1[1]) != 2:
-        raise TypeError("Points are composed of two cordinates. " + 
-        f"The input point line1[1] has {len(line1[1])} cordinates")
-
-    elif len(line2[0]) != 2:
-        raise TypeError("Points are composed of two cordinates. " + 
-        f"The input point line2[0] has {len(line2[0])} cordinates")
-
-    elif len(line2[1]) != 2:
-        raise TypeError("Points are composed of two cordinates. " + 
-        f"The input point line2[1] has {len(line2[1])} cordinates")
-
-    # Check the type of each cordinate in line 1
-    elif type(line1[0][0]) != float:
-        raise TypeError(f"cordinate line1[0][0] has the type " +
-        f"{type(line1[0][0])}. It must be a float.")
-    
-    elif type(line1[0][1]) != float:
-        raise TypeError(f"cordinate line1[0][1] has the type " +
-        f"{type(line1[0][1])}. It must be a float.")
-
-    elif type(line1[1][0]) != float:
-        raise TypeError(f"cordinate line1[1][0] has the type " +
-        f"{type(line1[1][0])}. It must be a float.")
-    
-    elif type(line1[1][1]) != float:
-        raise TypeError(f"cordinate line1[1][1] has the type " +
-        f"{type(line1[1][1])}. It must be a float.")
-    
-    # Check the type of each cordinate in line 2
-    elif type(line2[0][0]) != float:
-        raise TypeError(f"cordinate line2[0][0] has the type " +
-        f"{type(line2[0][0])}. It must be a float.")
-    
-    elif type(line2[0][1]) != float:
-        raise TypeError(f"cordinate line2[0][1] has the type " +
-        f"{type(line2[0][1])}. It must be a float.")
-
-    elif type(line2[1][0]) != float:
-        raise TypeError(f"cordinate line2[1][0] has the type " +
-        f"{type(line2[1][0])}. It must be a float.")
-    
-    elif type(line2[1][1]) != float:
-        raise TypeError(f"cordinate line2[1][1] has the type " +
-        f"{type(line2[1][1])}. It must be a float.")
+    # error check each line as a list of points
+    validatePoints(line1)
+    validatePoints(line2)
     
 
     m1 = findSlope(line1[0], line1[1])
@@ -193,31 +128,8 @@ def findAngle(line1:list, line2:list):
 
 def findSlope(point1:tuple, point2:tuple):
 
-    #check the number of cordinates in each point
-    if len(point1) != 2:
-        raise TypeError(f"cordinate point1 has {len(point1)} cordinates. " +
-        "It must have 2.")
-
-    elif len(point2) != 2:
-        raise TypeError(f"cordinate point2 has {len(point2)} cordinates. " +
-        "It must have 2.")
-    
-    #check the type of each cordinate
-    elif type(point1[0]) != float:
-        raise TypeError(f"the cordinate point1[0] has the " +
-        f"type {type(point1[0])}. it must have the type float.")
-    
-    elif type(point1[1]) != float:
-        raise TypeError(f"the cordinate point1[1] has the " +
-        f"type {type(point1[1])}. it must have the type float.")
-    
-    elif type(point2[0]) != float:
-        raise TypeError(f"the cordinate point2[0] has the " +
-        f"type {type(point2[0])}. it must have the type float.")
-    
-    elif type(point2[1]) != float:
-        raise TypeError(f"the cordinate point2[1] has the " +
-        f"type {type(point2[1])}. it must have the type float.")
+    # Error check the points
+    validatePoints([point1, point2])
 
     # sorce: https://www.physicsclassroom.com/class/1DKin/Lesson-3/Determining-the-Slope-on-a-p-t-Graph
     slope = (point2[1] - point1[1])/(point2[0]-point1[0])
@@ -226,6 +138,34 @@ def findSlope(point1:tuple, point2:tuple):
     f"slope == {slope}")
 
     return slope
+
+
+def validatePoints(points:list):
+    # Check for a length of 0
+    numPoints = len(points)
+    if numPoints == 0:
+        raise TypeError (f"the list of points must have at least one point")
+    
+    
+
+    for i in range(numPoints):
+        testValue = points[i]
+
+        if type(testValue) != tuple:
+            raise TypeError (f"points must have the type tuple. point[{i}] " + 
+            f"has the type type(testValue)")
+        
+        elif len(testValue) != 2:
+            raise TypeError(f"Cordinates are made up of two points. " + 
+            f"the cordinate point[{i}] has {len(testValue)} point(s)")
+        
+        elif type(testValue[0]) == float:
+            raise TypeError("Cordinates are made up of two floats. " + 
+            f"the value points[{i}][0] is a {type(testValue[0])}.")
+        
+        elif type(testValue[1]) == float:
+            raise TypeError("Cordinates are made up of two floats. " + 
+            f"the value points[{i}][0] is a {type(testValue[1])}.")
 
 if __name__ == "__main__":
     main()

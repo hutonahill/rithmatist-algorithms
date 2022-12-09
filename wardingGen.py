@@ -75,7 +75,7 @@ def pointGen(circle:list, numPoints = 3):
 
     numPoints = numPoints - 1
 
-    for i in range(1, numPoints):
+    for i in range(0, numPoints):
 
 
         rand2 = random.randint(0,len(circle)) 
@@ -95,5 +95,14 @@ def pointGen(circle:list, numPoints = 3):
 
     return output
 
+def main():
+    circleDict = circleGen(5)
 
-        
+    circleList = circleDict[CIRCLE_KEY()]
+
+    points = pointGen(circleList)
+
+    print(points)
+
+if __name__ == "__main__":
+    main()
