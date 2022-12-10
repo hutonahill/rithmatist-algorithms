@@ -344,6 +344,8 @@ if __name__ == "__main__":
     
     num3PointTests = 5
 
+    num5PointTests = 5
+
     #generate values for the 3 point test
     for i in range(0, num3PointTests):
         inputs.append(pointGen(circleList, 3))
@@ -384,9 +386,19 @@ if __name__ == "__main__":
             f"\n      userError == {testOutput[1]}" +
             f"\n      circleType == {testOutput[2]}")
 
+    print("\n ==== Generating new points ==== \n")
+
+    inputs = []
+    
+    
+
+    #generate values for the 3 point test
+    for i in range(0, num5PointTests):
+        inputs.append(pointGen(circleList, 5))
+
     print()
-    print(" === 5 Points Input === ")
-    for i in range(0, 5):
+    print(" === 5 Points, unknown type === ")
+    for i in range(0, num5PointTests):
         testPoints = pointGen(circleList, 5)
 
         testOutput = main(centerPoint, testPoints)
@@ -394,18 +406,19 @@ if __name__ == "__main__":
         print(f"   {i+1}: "+
             f"\n      arePointsValid == {testOutput[0]}" +
             f"\n      userError == {testOutput[1]}" +
-            f"\n      circleType == {testOutput[2]}" + 
-            "\n")
+            f"\n      circleType == {testOutput[2]}")
+
+    print()
+    print(" === 5 Points, known 6-point === ")
+    for i in range(0, num5PointTests):
+        testPoints = pointGen(circleList, 5)
+
+        testOutput = main(centerPoint, testPoints, SIX_POINT_KEY())
+
+        print(f"   {i+1}: "+
+            f"\n      arePointsValid == {testOutput[0]}" +
+            f"\n      userError == {testOutput[1]}" +
+            f"\n      circleType == {testOutput[2]}")
     
-
     print()
-    for i in range(len(inputs)):
-        currentInput = inputs[i]
-        testOutput = main(centerPoint, currentInput[0], currentInput[1])
-
-        print(f"{i}: "+
-            f"\n   arePointsValid == {testOutput[0]}" +
-            f"\n   userError == {testOutput[1]}" +
-            f"\n   circleType == {testOutput[2]}" + 
-            "\n")
-    print()
+    
