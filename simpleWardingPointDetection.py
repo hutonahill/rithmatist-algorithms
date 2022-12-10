@@ -27,21 +27,40 @@ def main(centerPoint:tuple, points:list, circleType = 'unknown'):
 
     # Known 4-point circle
     if circleType == FOUR_POINT_KEY():
-        userError = fourPoint(centerPoint, points)
 
-        if userError <= ACCEPTABLE_DEGREES_ERROR():
-            arePointsValid = True
-        else:
-            arePointsValid = False
+        # Generate an error score for each point assuming a 4-point circle
+        userError = fourPoint(centerPoint, points)
+        
+        
+        assert type(userError) == list, \
+            (f"type(userError) == {type(userError)}, " + 
+            f"userError == {userError}")
+
+        # get the total error score of the points and wether or not it is
+        # a valid circle. 
+        copyData = sumCheckScores(userError)
+
+        arePointsValid = copyData[1]
+
+        # circleType is unchanged.
+        
     
     # Known 6-point circle
     elif circleType == SIX_POINT_KEY():
+        
+        # generate an error score for each point assuming a 6-point circle
         userError = sixPoint(centerPoint, points)
 
-        if userError <= ACCEPTABLE_DEGREES_ERROR():
-            arePointsValid = True
-        else:
-            arePointsValid = False
+        assert type(userError) == list, \
+            (f"type(userError) == {type(userError)}, " + 
+            f"userError == {userError}")
+
+        copyData = sumCheckScores(userError)
+
+        arePointsValid = copyData[1]
+
+        # circleType is unchanged.
+        
 
     # if the type of circle is not known try to detect it
     else:
@@ -53,79 +72,97 @@ def main(centerPoint:tuple, points:list, circleType = 'unknown'):
         if numPoints == 1:
             arePointsValid = True
             userError = [0.0]
+            # circleType is unchanged
         
         # If there are between 2 and 4 points attempt to determin which type
         # the circle is
         elif 2 <= numPoints <= 4:
+
+            # calculate the error of every point assuming a 4-point circle
             fourScoreList = fourPoint(centerPoint, points)
             
             assert type(fourScoreList) == list, \
                 (f"type(fourScoreList) == {type(fourScoreList)}, " + 
                 f"fourScoreList == {fourScoreList}")
 
+            # get the total error score of the points and wether or not it is
+            # a valid circle. 
             copyData = sumCheckScores(fourScoreList)
 
+            # Store the total score of this set of points
             fourScore = copyData[0]
-
+            
+            # Store wether or not the circle is valid as a 4-point
             validFourFlag = copyData[1]
 
-
+            # calculate the error of every point assuming a 4-point circle
             sixScoreList = sixPoint(centerPoint, points)
 
             assert type(sixScoreList) == list, \
                 (f"type(sixScore) == {type(sixScoreList)}, " + 
                 f"sixScore == {sixScoreList}")
             
+            # get the total error score of the points and wether or not it is
+            # a valid circle. 
             copyData = sumCheckScores(sixScoreList)
 
+            #store the total score of this set of points assuming a 6-point circle
             sixScore = copyData[0]
-
+            
+            # Store wether or not the circle is valid as a 6-point circle
             validSixFlag = copyData[1]
 
             # if the four and six scores are the same,
             # dont return a circle type
             if fourScore == sixScore:
-
+                
+                # Store the one of the scores as a the user error
                 userError = fourScoreList
-
+                
+                # Store one fo the flags as the primary valid flag
                 arePointsValid = validFourFlag
 
             # if the user error is lower when the circle is assumed to be a 
             # 4-point, return that the circle is a 4-point
             elif fourScore < sixScore:
-                userError = fourScoreList
 
+                # Store the 4-point error lsit as the userError
+                userError = fourScoreList
+                
+                # Store the 4-point valid flag as the primary valid flag
                 arePointsValid = validFourFlag
                 
+                # Store 4-point circle as the circle type
                 circleType = FOUR_POINT_KEY()
 
             # if the user error is lower when the circle is assumed to be a 
             # 6-point, return that the circle is a 6-point
             else:
+                # Store the 6-point error lsit as the userError
                 userError = sixScoreList
 
+                # Store the 6-point valid flag as the primary valid flag
                 arePointsValid = validSixFlag
                 
+                # Store 6-point circle as the circle type
                 circleType = SIX_POINT_KEY()
         
         # if 5 - 6 points are given, assume its a 6 point
         elif 5 <= numPoints <= 6:
-            sixScoreList = sixPoint(centerPoint, points)
 
-            assert type(sixScoreList) == list, \
-                (f"type(sixScore) == {type(sixScoreList)}, " + 
-                f"sixScore == {sixScoreList}")
-            
-            copyData = sumCheckScores(sixScoreList)
+            # generate an error score for each point assuming a 6-point circle
+            userError = sixPoint(centerPoint, points)
 
-            sixScore = copyData[0]
+            assert type(userError) == list, \
+                (f"type(userError) == {type(userError)}, " + 
+                f"userError == {userError}")
 
-            validSixFlag = copyData[1]
+            # Determin wether the circle is valid
+            copyData = sumCheckScores(userError)
 
-            userError = sixScoreList
+            arePointsValid = copyData[1]
 
-            arePointsValid = validSixFlag
-            
+            # Set circleType to 6-point circle
             circleType = SIX_POINT_KEY()
 
         # if more than 4 points are given 
@@ -155,6 +192,8 @@ def filler():
     '''no funciton
     \nprvents below functions from expanding every time i make a loop or if.'''
     pass
+
+
 
 def fourPoint(center:tuple, points:list):
     '''For calculating the error for a 4 point circle
@@ -300,20 +339,63 @@ if __name__ == "__main__":
     circleList = circleDict[CIRCLE_KEY()]
 
     centerPoint = circleDict[CENTER_KEY()]
-
-    inputs = []
-
-    for i in range(0, 5):
-        testPoints = pointGen(circleList, 3)
-
-        testInputs = [testPoints, 'unknown']
-        inputs.append(testInputs)
     
+    inputs = []
+    
+    num3PointTests = 5
+
+    #generate values for the 3 point test
+    for i in range(0, num3PointTests):
+        inputs.append(pointGen(circleList, 3))
+
+    print()
+    print(" === 3 Points, unknown type === ")
+    for i in range(0, num3PointTests):
+        testPoints = inputs[i].copy()
+
+        testOutput = main(centerPoint, testPoints)
+
+        print(f"   {i+1}: "+
+            f"\n      arePointsValid == {testOutput[0]}" +
+            f"\n      userError == {testOutput[1]}" +
+            f"\n      circleType == {testOutput[2]}")
+
+    print()
+    print(" === 3 Points, known 4-point === ")
+    for i in range(0, num3PointTests):
+        testPoints = inputs[i].copy()
+
+        testOutput = main(centerPoint, testPoints, FOUR_POINT_KEY())
+
+        print(f"   {i+1}: "+
+            f"\n      arePointsValid == {testOutput[0]}" +
+            f"\n      userError == {testOutput[1]}" +
+            f"\n      circleType == {testOutput[2]}")
+
+    print()
+    print(" === 3 Points, known 6-point === ")
+    for i in range(0, num3PointTests):
+        testPoints = inputs[i].copy()
+
+        testOutput = main(centerPoint, testPoints, SIX_POINT_KEY())
+
+        print(f"   {i+1}: "+
+            f"\n      arePointsValid == {testOutput[0]}" +
+            f"\n      userError == {testOutput[1]}" +
+            f"\n      circleType == {testOutput[2]}")
+
+    print()
+    print(" === 5 Points Input === ")
     for i in range(0, 5):
         testPoints = pointGen(circleList, 5)
 
-        testInputs = [testPoints, 'unknown']
-        inputs.append(testInputs)
+        testOutput = main(centerPoint, testPoints)
+
+        print(f"   {i+1}: "+
+            f"\n      arePointsValid == {testOutput[0]}" +
+            f"\n      userError == {testOutput[1]}" +
+            f"\n      circleType == {testOutput[2]}" + 
+            "\n")
     
 
     print()
