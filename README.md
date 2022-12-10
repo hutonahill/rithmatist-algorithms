@@ -10,10 +10,14 @@ https://coppermind.net/wiki/Rithmatics
 
 Current Features:
   - kinda accurate calculations for segment strength of a line of warding
+  - 4-point and 6-point circle detection (Only lightly tested)
 
- Next Project:
- -  increasing segment strength calculation accuracy
- -  9-Point detection
+ Next Projects:
+ -  Learn GoDot
+ -  Create a basic enverment that a VR headset can see
+ -  Set up Drawing on the ground
+ 
+
 
 Use of the code in this repository in any project without written permission is prohibited.
 <br>Use of the ideas in the google drive folder is encuraged.
