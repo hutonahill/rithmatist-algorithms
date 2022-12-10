@@ -12,6 +12,17 @@ def CENTER_KEY():
 def CIRCLE_KEY():
     return "circle"
 
+
+def main():
+    circleDict = circleGen(5)
+
+    circleList = circleDict[CIRCLE_KEY()]
+
+    points = pointGen(circleList)
+
+    print(points)
+
+
 def circleGen(radius, centerX =0, centerY=0):
     '''radius: the radius of the intended sample circle
     \ncenterX: the x cordinate of the center of the intended sample circle
@@ -94,15 +105,6 @@ def pointGen(circle:list, numPoints = 3):
         output.append(circle[i])
 
     return output
-
-def main():
-    circleDict = circleGen(5)
-
-    circleList = circleDict[CIRCLE_KEY()]
-
-    points = pointGen(circleList)
-
-    print(points)
 
 
 # Validation Functions
