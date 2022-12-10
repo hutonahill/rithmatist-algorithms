@@ -17,7 +17,7 @@ Current Features:
  Next Projects:
  -  Learn GoDot
  -  Create a basic enverment that a VR headset can see
- -  Set up Drawing on the ground
+ -  Render a ground object based on the user's oculus gardian
  these project are going to have to wait until i get my laptop (or my mouse, not sure) fixed.
 
 
