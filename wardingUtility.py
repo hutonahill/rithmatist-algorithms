@@ -69,7 +69,7 @@ def pointGen(circle:list, numPoints = 3):
         f"it is currently set to {numPoints}.")
 
 
-    rand1 = random.randint(0,len(circle))
+    rand1 = random.randint(0,len(circle)-1)
 
     randIndexes = [rand1]
 
@@ -78,11 +78,11 @@ def pointGen(circle:list, numPoints = 3):
     for i in range(0, numPoints):
 
 
-        rand2 = random.randint(0,len(circle)) 
+        rand2 = random.randint(0, len(circle)-1) 
 
         #make sure there are no duplicates
         while rand2 in randIndexes:
-            rand2 = random.randint(0,len(circle)) 
+            rand2 = random.randint(0, len(circle)-1) 
     
         randIndexes.append(rand2)
 
@@ -111,7 +111,8 @@ def validatePointList(points:list, listName = "points"):
     # Check for a length of 0
     numPoints = len(points)
     if numPoints == 0:
-        raise TypeError (f"the list of points must have at least one point")
+        raise TypeError (f"the list of points must have at least one point. " + 
+        f"len({listName}) == 0")
     
     
 
@@ -120,30 +121,37 @@ def validatePointList(points:list, listName = "points"):
 
         if type(testValue) != tuple:
             raise TypeError (f"points must have the type tuple. {listName}[{i}] " + 
-            f"has the type {type(testValue)}")
+            f"has the type {type(testValue)}. {listName}[{i}] == {testValue}.")
 
         validatePoint(testValue, f"{listName}[{i}]")
 
 def validatePoint(point:tuple, pointName='point'):
     if len(point) != 2:
         raise TypeError(f"Cordinates are made up of two values. " + 
-        f"the cordinate {pointName} has {len(point)}value(s)")
+        f"the cordinate {pointName} has {len(point)}value(s). " + 
+        f"{pointName} == {point}")
     
     elif type(point[0]) == float:
         raise TypeError("Cordinates are made up of two floats. " + 
-        f"the value {pointName}[0] is a {type(point[0])}.")
+        f"the value {pointName}[0] is a {type(point[0])}. " +
+        f"{pointName}[0] == {point[0]}")
     
     elif type(point[1]) == float:
         raise TypeError("Cordinates are made up of two floats. " + 
-        f"the value {pointName}[0] is a {type(point[1])}.")
+        f"the value {pointName}[0] is a {type(point[1])}. " +
+        f"{pointName}[1] == {point[1]}")
 
 def validateCircle(circle:dict, dictName = "circle"):
-
+    '''Check that a circle dict has the proper format.
+    \nChecks for numper of values, data type of values.
+    \ncircle:dict => the dictionary to be validated
+    \ndictName => the name of the dict. This will show up in error messages.'''
     lenDict = len(circle)
 
     if lenDict != 2:
         raise TypeError(f"a {dictName} must be composed of two keys. " + 
-        f"this dict has the length of {lenDict}")
+        f"this dict has the length of {lenDict}. " + 
+        f"{dictName}.keys() == {circle.key()}")
     
     # validate the center point
 
@@ -152,14 +160,16 @@ def validateCircle(circle:dict, dictName = "circle"):
         centerPoint = circle[CENTER_KEY()]
     
     except KeyError:
-        raise TypeError(f"{dictName} must contain the key '{CENTER_KEY()}'.")
+        raise TypeError(f"{dictName} must contain the key '{CENTER_KEY()}'. " + 
+        f"{dictName}.keys() == {circle.keys()}")
     
     # make sure the center point is a tuple
     centerType = type(centerPoint)
 
     if centerType != tuple:
         raise TypeError("The center point must be in the format of a tuple." + 
-        f"{dictName}['{CENTER_KEY()}'] has the format {centerType}")
+        f"{dictName}['{CENTER_KEY()}'] has the format {centerType} " +
+        f"{dictName}['{CENTER_KEY()}'] == {centerType}")
 
     validatePoint(centerPoint, f"{dictName}['{CENTER_KEY()}']")
 
@@ -169,13 +179,15 @@ def validateCircle(circle:dict, dictName = "circle"):
         circleList= circle[CIRCLE_KEY()]
     
     except KeyError:
-        raise TypeError(f"{dictName} must contain the key '{CIRCLE_KEY()}'.")
+        raise TypeError(f"{dictName} must contain the key '{CIRCLE_KEY()}'. " + 
+        f"{dictName}.keys() == {circle.keys()}")
     
     # make sure the value at the circle key has the proper value.
     if type(circleList) != list:
-        raise TypeError(f"the location circle['{CIRCLE_KEY()}' must contain " +
-        "list of points on the edge of a circle. " + 
-        f"It contains a {type(circleList)}")
+        raise TypeError(f"the location {dictName}['{CIRCLE_KEY()}'] must contain " +
+        " a list of points on the edge of a circle. " + 
+        f"It contains a {type(circleList)}. " + 
+        f"{dictName}['{CIRCLE_KEY()}'] == {circleList}")
     
     # validate the list of points
     validatePointList(circleList, f"{dictName}['{CIRCLE_KEY()}']")
