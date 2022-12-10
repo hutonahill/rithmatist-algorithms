@@ -104,5 +104,81 @@ def main():
 
     print(points)
 
+
+# Validation Functions
+def validatePointList(points:list, listName = "points"):
+    
+    # Check for a length of 0
+    numPoints = len(points)
+    if numPoints == 0:
+        raise TypeError (f"the list of points must have at least one point")
+    
+    
+
+    for i in range(numPoints):
+        testValue = points[i]
+
+        if type(testValue) != tuple:
+            raise TypeError (f"points must have the type tuple. {listName}[{i}] " + 
+            f"has the type {type(testValue)}")
+
+        validatePoint(testValue, f"{listName}[{i}]")
+
+def validatePoint(point:tuple, pointName='point'):
+    if len(point) != 2:
+        raise TypeError(f"Cordinates are made up of two values. " + 
+        f"the cordinate {pointName} has {len(point)}value(s)")
+    
+    elif type(point[0]) == float:
+        raise TypeError("Cordinates are made up of two floats. " + 
+        f"the value {pointName}[0] is a {type(point[0])}.")
+    
+    elif type(point[1]) == float:
+        raise TypeError("Cordinates are made up of two floats. " + 
+        f"the value {pointName}[0] is a {type(point[1])}.")
+
+def validateCircle(circle:dict, dictName = "circle"):
+
+    lenDict = len(circle)
+
+    if lenDict != 2:
+        raise TypeError(f"a {dictName} must be composed of two keys. " + 
+        f"this dict has the length of {lenDict}")
+    
+    # validate the center point
+
+    # Make sure the center point is included in the circle dict
+    try:
+        centerPoint = circle[CENTER_KEY()]
+    
+    except KeyError:
+        raise TypeError(f"{dictName} must contain the key '{CENTER_KEY()}'.")
+    
+    # make sure the center point is a tuple
+    centerType = type(centerPoint)
+
+    if centerType != tuple:
+        raise TypeError("The center point must be in the format of a tuple." + 
+        f"{dictName}['{CENTER_KEY()}'] has the format {centerType}")
+
+    validatePoint(centerPoint, f"{dictName}['{CENTER_KEY()}']")
+
+    # validate the circle point list
+    #make sure the dict ahs the circle key.
+    try:
+        circleList= circle[CIRCLE_KEY()]
+    
+    except KeyError:
+        raise TypeError(f"{dictName} must contain the key '{CIRCLE_KEY()}'.")
+    
+    # make sure the value at the circle key has the proper value.
+    if type(circleList) != list:
+        raise TypeError(f"the location circle['{CIRCLE_KEY()}' must contain " +
+        "list of points on the edge of a circle. " + 
+        f"It contains a {type(circleList)}")
+    
+    # validate the list of points
+    validatePointList(circleList, f"{dictName}['{CIRCLE_KEY()}']")
+
 if __name__ == "__main__":
     main()
