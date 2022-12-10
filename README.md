@@ -18,7 +18,7 @@ Current Features:
  -  Learn GoDot
  -  Create a basic enverment that a VR headset can see
  -  Set up Drawing on the ground
- 
+ these project are going to have to wait until i get my laptop (or my mouse, not sure) fixed.
 
 
 Use of the code in this repository in any project without written permission is prohibited.
